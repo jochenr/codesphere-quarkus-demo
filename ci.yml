@@ -1,0 +1,11 @@
+schemaVersion: v0.2
+prepare:
+  steps:
+    - name: NIX Shell init
+      command: nix-shell
+    - name: Maven Build
+      command: nix-shell --run "mvn clean install -DskipTests -DskipITs"
+test:
+  steps:
+    - command: nix-shell --run "mvn clean verify"
+run: {}
