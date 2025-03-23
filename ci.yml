@@ -12,4 +12,10 @@ prepare:
 test:
   steps:
     - command: nix-shell --run "mvn verify"
-run: {}
+run:
+  service-1:
+    steps:
+      - command: java -jar target/quarkus-app/quarkus-run.jar
+    plan: 20
+    replicas: 1
+    isPublic: false
