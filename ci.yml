@@ -1,11 +1,15 @@
 schemaVersion: v0.2
 prepare:
   steps:
+    - name: NIX initialisieren und Maven installieren
+      command: nix-env -iA nixpkgs.maven
     - name: NIX Shell init
       command: nix-shell
     - name: Maven Build
       command: nix-shell --run "mvn clean install -DskipTests -DskipITs"
+    - name: Java OpenJDK Temurin (21) installieren
+      command: nix-env -iA nixpkgs.temurin-bin
 test:
   steps:
-    - command: nix-shell --run "mvn clean verify"
+    - command: nix-shell --run "mvn verify"
 run: {}
